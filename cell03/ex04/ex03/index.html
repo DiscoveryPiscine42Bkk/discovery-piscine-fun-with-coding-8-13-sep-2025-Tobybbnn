@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jQuery To-Do List</title>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+</head>
+<body>
+    <form id="task-form">
+        <input type="text" id="objective" placeholder="Enter new task" required>
+        <button type="submit">New</button>
+    </form>
+    <div id="ft_list"></div>
+    <script>
+
+        $(function() {
+            function addList(value, id) {
+                if (!value) return;
+                $('<div/>').attr('id', id).text(value).prependTo('#ft_list');
+            }
+
+            function checklist() {
+                const cookies = $.cookie();
+                for (const id in cookies) {
+                    if (!isNaN(id)) {
+                        addList(cookies[id], id);
+                    }
+                }
+            }
+
+            $('#task-form').on('submit', function(event) {
+                event.preventDefault();
+                
+                const taskInput = $('#objective');
+                const data = taskInput.val().trim();
+
+                if (data) {
+                    const id = Date.now();
+                    addList(data, id);
+                    $.cookie(id, data, {expires: 365}); 
+                    taskInput.val('');
+                }
+            });
+
+            $('#ft_list').on('dblclick', 'div', function() {
+                const taskDiv = $(this);
+                const id = taskDiv.attr('id');
+
+                $.removeCookie(id); 
+                taskDiv.remove();
+            });
+
+            checklist();
+        });
+    </script>
+</body>
+</html>

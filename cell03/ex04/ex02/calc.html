@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator with jQuery</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+</head>
+<body>
+
+    <form id="calculator-form">
+        <input id="Num_1" required />
+        <br>
+        <select id="Oprator">
+            <option value="Choose">Choose</option>
+            <option value="+">+</option>
+            <option value="-">-</option>
+            <option value="*">*</option>
+            <option value="/">/</option>
+            <option value="%">%</option>
+        </select>
+        <br>
+        <input id="Num_2" required />
+        <input type="submit" value="Try me!" />
+    </form>
+
+    <script>
+
+        $(function() {
+            $("#calculator-form").on("submit", function(event) {
+                event.preventDefault();
+                let number1 = $("#Num_1").val();
+                let number2 = $("#Num_2").val();
+                let operator = $("#Oprator").val();
+
+                if (operator == "Choose") {
+                    alert("Please select an operator");
+                }
+                else if (OnlyNumbers(number1) && OnlyNumbers(number2)) {
+                    let num1_int = parseInt(number1);
+                    let num2_int = parseInt(number2);
+                    if (num1_int < 0 || num2_int < 0) {
+                        alert("Error :(");
+                    }
+                    else if ((operator == "%" || operator == "/") && num2_int === 0) {
+                        alert("It's over 9000!");
+                    }
+                    else {
+                        alert(eval(number1 + operator + number2));
+                    }
+                } else {
+                    alert("Error :(");
+                }
+            });
+
+            function OnlyNumbers(str) {
+                return /^[0-9]+$/.test(str);
+            }
+
+            function greeting() {
+                alert("please use me...");
+            }
+            setTimeout(greeting, 30000);
+
+        });
+    </script>
+</body>
+</html>
