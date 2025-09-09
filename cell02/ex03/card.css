@@ -1,0 +1,54 @@
+body{
+    display: flex;
+    justify-content: center;
+    height: 100vh;
+    align-items: center;
+    background-color: rgb(205, 214, 222);
+    margin: 0;
+}
+
+.profile-card{
+    background-color: white;
+    /* border-radius: 10px; */
+    box-shadow: 0 4px 8px black;
+    overflow: hidden;
+    width: 400px;
+    text-align: center;
+}
+
+.profile-image img{
+    width: 100%;
+}
+.social-links > a > img {
+    height: 30px;
+}
+
+.info{
+    padding: 10px;
+}
+
+.info h1{ 
+    font-size: 34px;
+}
+
+.info h2{ 
+    font-size: 20px;
+    color: rgba(72, 72, 72, 0.999);
+}
+
+.info h3{ 
+    font-size: 20px;
+}
+
+.butt {
+    margin-top: 5px;
+    padding: 5px;
+	background-color:black;
+	color:white;
+    height: 20px;
+    cursor: pointer;
+    object-fit: contain;
+	font-family:Arial;
+	font-size:16px;
+	font-weight:bold;
+}
